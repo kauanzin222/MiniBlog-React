@@ -10,7 +10,7 @@ const NavBar = () => {
   return (
     <nav className="sticky top-0 z-10 flex items-center justify-between border-b border-slate-100 bg-white/80 px-8 py-4 backdrop-blur-md">
       <NavLink to="/" className="text-lg font-semibold text-slate-900">
-        Mini <span className="text-primary">BLOG</span>
+        Mini <span>BLOG</span>
       </NavLink>
       <ul className="flex items-center gap-1">
         <li>
