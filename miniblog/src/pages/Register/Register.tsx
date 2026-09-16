@@ -1,6 +1,8 @@
 import { useState, useEffect, type FormEvent } from 'react'
 import type { User } from '../../interfaces/User'
 import { XCircle } from 'lucide-react'
+import { useAuthentication } from '../../hooks/useAuthentication'
+import { Button } from '../../components/Button'
 
 
 
@@ -11,7 +13,9 @@ const Register = () => {
     const [confirmPassword, setConfirmPassword] = useState<string>('')
     const [error, setError] = useState<string>('')
 
-    const handleSubmit = (e: FormEvent) => {
+    const { createUser, error: authError, loading } = useAuthentication()
+
+    const handleSubmit = async (e: FormEvent) => {
         e.preventDefault()
         setError('')
 
@@ -25,7 +29,17 @@ const Register = () => {
             setError('As senhas precisam ser iguais')
             return
         }
+
+        const res = await createUser(user)
+
+        console.log(res)
     }
+
+    useEffect(() => {
+        if (authError) {
+            setError(authError)
+        }
+    }, [authError])
 
     return (
         <div className="auth-page">
@@ -80,7 +94,9 @@ const Register = () => {
                     />
                 </div>
 
-                <button type='submit'>Cadastrar</button>
+                <Button loading={loading}>
+                    Cadastrar
+                </Button>
 
                 {error &&
                     <p className='form-error'>

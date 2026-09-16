@@ -32,7 +32,7 @@ body {
   }
 
   form button[type="submit"] {
-    @apply w-full rounded-md bg-slate-900 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-slate-800;
+    @apply flex items-center justify-center gap-2 w-full rounded-md bg-slate-900 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-70;
   }
 
   .auth-page {
