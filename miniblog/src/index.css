@@ -47,3 +47,9 @@ body {
     @apply text-sm text-slate-500;
   }
 }
+
+@layer components {
+  .form-error {
+    @apply flex items-center gap-2 rounded-xl border border-red-200 bg-red-50/60 px-4 py-3 text-sm font-medium text-red-500;
+  }
+}
