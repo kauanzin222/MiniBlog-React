@@ -1,11 +1,15 @@
-import type { Auth } from 'firebase/auth'
+import type { User as FirebaseUser } from 'firebase/auth'
 import { createContext, useContext, type ReactNode } from 'react'
 
-const AuthContext = createContext<Auth | null>(null)
+type AuthContextValue = {
+    user: FirebaseUser | null
+}
+
+const AuthContext = createContext<AuthContextValue | null>(null)
 
 type AuthProviderProps = {
     children: ReactNode
-    value: Auth | null
+    value: AuthContextValue
 }
 
 export function AuthProvider({ children, value }: AuthProviderProps) {
@@ -17,5 +21,11 @@ export function AuthProvider({ children, value }: AuthProviderProps) {
 }
 
 export function useAuthValue() {
-    return useContext(AuthContext)
+    const context = useContext(AuthContext)
+
+    if (!context) {
+        throw new Error('useAuthValue deve ser usado dentro de AuthProvider')
+    }
+
+    return context
 }
