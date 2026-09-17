@@ -12,7 +12,7 @@ const NavBar = () => {
       ? "bg-slate-900 text-white"
       : "text-slate-500 hover:bg-slate-100 hover:text-slate-900"
     }`
-;
+    ;
   return (
     <nav className="sticky top-0 z-10 flex items-center justify-between border-b border-slate-100 bg-white/80 px-8 py-4 backdrop-blur-md">
       <NavLink to="/" className="text-lg font-semibold text-slate-900">
@@ -24,16 +24,34 @@ const NavBar = () => {
             Home
           </NavLink>
         </li>
-        <li>
-          <NavLink to="/login" className={linkClasses}>
-            Entrar
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to="/register" className={linkClasses}>
-            Cadastrar
-          </NavLink>
-        </li>
+        {!user &&
+          <>
+            <li>
+              <NavLink to="/login" className={linkClasses}>
+                Entrar
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/register" className={linkClasses}>
+                Cadastrar
+              </NavLink>
+            </li>
+          </>
+        }
+        {user &&
+          <>
+            <li>
+              <NavLink to="/posts/create" className={linkClasses}>
+                Novo post
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/dashboard" className={linkClasses}>
+                Dashboard
+              </NavLink>
+            </li>
+          </>
+        }
         <li>
           <NavLink to="/about" className={linkClasses}>
             Sobre
