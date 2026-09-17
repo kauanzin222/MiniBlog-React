@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom"
 import { useAuthentication } from "../hooks/useAuthentication"
 
 import { useAuthValue } from "../context/AuthContext"
+import { Button } from "./Button"
 
 const NavBar = () => {
   const { user } = useAuthValue()
@@ -60,7 +61,7 @@ const NavBar = () => {
         </li>
         {user &&
           <li>
-            <button onClick={logout}>Sair</button>
+            <Button onClick={logout} type="button">Sair</Button>
           </li>
         }
       </ul>

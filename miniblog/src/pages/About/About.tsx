@@ -4,7 +4,7 @@ const About = () => {
   return (
     <main className="mx-auto max-w-xl px-6 py-20 text-center">
       <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900">
-        Sobre o Mini Blog
+        Sobre o Mini BLOG
       </h1>
       <p className="mt-4 text-sm leading-relaxed text-slate-500">
         Este projeto consiste em um blog feito com React no Front-End e Firebase no Back-End
