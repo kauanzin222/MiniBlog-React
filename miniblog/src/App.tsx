@@ -39,18 +39,18 @@ function App() {
   }
 
   return (
-    <main>
+    <main className="flex min-h-screen flex-col">
       <AuthProvider value={{ user }}>
         <BrowserRouter>
           <NavBar />
-          <div>
+          <div className="flex-1">
             <Routes>
               <Route path='/' element={<Home />} />
               <Route path='/about' element={<About />} />
-              <Route path='/login' element={!user ? <Login /> : <Navigate to='/'/>} />
-              <Route path='/register' element={!user ? <Register /> : <Navigate to='/'/>} />
-              <Route path='/posts/create' element={user ? <CreatePost /> : <Navigate to='/login'/>} />
-              <Route path='/dashboard' element={user ? <Dashboard /> : <Navigate to='/login'/>} />
+              <Route path='/login' element={!user ? <Login /> : <Navigate to='/' />} />
+              <Route path='/register' element={!user ? <Register /> : <Navigate to='/' />} />
+              <Route path='/posts/create' element={user ? <CreatePost /> : <Navigate to='/login' />} />
+              <Route path='/dashboard' element={user ? <Dashboard /> : <Navigate to='/login' />} />
             </Routes>
           </div>
           <Footer />

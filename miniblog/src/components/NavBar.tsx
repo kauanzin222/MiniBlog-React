@@ -5,6 +5,9 @@ import { useAuthentication } from "../hooks/useAuthentication"
 import { useAuthValue } from "../context/AuthContext"
 import { Button } from "./Button"
 
+import { SquareArrowRightExit } from 'lucide-react'
+
+
 const NavBar = () => {
   const { user } = useAuthValue()
   const { logout } = useAuthentication()
@@ -61,7 +64,13 @@ const NavBar = () => {
         </li>
         {user &&
           <li>
-            <Button onClick={logout} type="button">Sair</Button>
+            <Button
+              onClick={logout}
+              type="button"
+              className="flex items-center justify-center rounded-md p-2 text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-900 cursor-pointer" 
+            >
+              <SquareArrowRightExit className="h-5 w-5" />
+            </Button>
           </li>
         }
       </ul>

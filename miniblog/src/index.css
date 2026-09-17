@@ -31,6 +31,10 @@ body {
     @apply w-full rounded-md border border-slate-200 bg-slate-50 px-3.5 py-2.5 text-sm text-slate-800 outline-none transition placeholder:text-slate-400 focus:border-slate-400 focus:bg-white;
   }
 
+  .section-form textarea {
+    @apply w-full resize-y rounded-md border border-slate-200 bg-slate-50 px-3.5 py-2.5 text-sm text-slate-800 outline-none transition placeholder:text-slate-400 focus:border-slate-400 focus:bg-white min-h-[120px];
+  }
+
   form button[type="submit"] {
     @apply flex items-center justify-center gap-2 w-full rounded-md bg-slate-900 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-70;
   }
