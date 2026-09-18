@@ -2,17 +2,42 @@ import { useState, type FormEvent } from "react"
 import { useNavigate } from "react-router-dom"
 import { useAuthValue } from "../../context/AuthContext"
 import { Button } from "../../components/Button"
+import { useInsertDocument } from "../../hooks/useInsertDocument"
+import { XCircle } from "lucide-react"
 
 
 const CreatePost = () => {
-  const [title, setTitle] = useState<string>('')
-  const [image, setImage] = useState<string>('')
-  const [body, setBody] = useState<string>('')
+  const [title, setTitle] = useState('')
+  const [image, setImage] = useState('')
+  const [body, setBody] = useState('')
   const [tags, setTags] = useState<string[]>([])
-  const [formError, setFormError] = useState<string>('')
+  const [formError, setFormError] = useState('')
+
+  const { user } = useAuthValue()
+
+  const { insertDocument, response } = useInsertDocument('posts')
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
+    setFormError('')
+
+    // validate image URL
+
+    // criar o array de tags
+
+    // checar todos os valores
+
+    insertDocument({
+      title,
+      image,
+      body,
+      tags,
+      uid: user?.uid,
+      createdBy: user?.displayName
+    })
+
+    // redirect to home page
+    
   }
 
   return (
@@ -63,19 +88,19 @@ const CreatePost = () => {
             required
             placeholder='Insira as tags separadas por vírgula'
             value={tags}
-            onChange={(e) => setTags(e.target.value.split(','))}
+            onChange={(e) => setTags(e.target.value.split(' ,'))}
           />
         </div>
 
-        <Button>
+        <Button loading={response.loading}>
           Criar
         </Button>
 
-        {/* {error &&
+        {response.error &&
           <p className='form-error'>
             <XCircle className="h-4 w-4 shrink-0" />
-            {error}
-          </p>} */}
+            {response.error}
+          </p>}
       </form>
     </div>
   )

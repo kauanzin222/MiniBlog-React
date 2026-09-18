@@ -1,4 +1,4 @@
-import { useState, useEffect, useReducer } from 'react'
+import { useEffect, useReducer, useRef } from 'react'
 import { db } from '../firebase/config'
 import { collection, addDoc, Timestamp } from 'firebase/firestore'
 
@@ -36,11 +36,11 @@ const insertReducer = (state: State, action: Action): State => {
 export const useInsertDocument = (docCollection: string) => {
     const [response, dispatch] = useReducer(insertReducer, initialState)
 
-    const [cancelled, setCancelled] = useState(false)
+    const cancelled = useRef(false)
 
-    //   deal with memory leak
+    // deal with memory leak
     const checkCancelBeforeDispatch = (action: Action) => {
-        if (!cancelled) {
+        if (!cancelled.current) {
             dispatch(action)
         }
     }
@@ -66,7 +66,11 @@ export const useInsertDocument = (docCollection: string) => {
     }
 
     useEffect(() => {
-        return () => setCancelled(true)
+        cancelled.current = false // reseta no mount/remount
+
+        return () => {
+            cancelled.current = true
+        }
     }, [])
 
     return { insertDocument, response }
